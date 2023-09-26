@@ -6,6 +6,8 @@ public class Pessoa {
     private int idade;
     private char genero;
 
+    public Pessoa(){}
+
     public Pessoa(String nome, int idade, char genero){
         
         setNome(nome);
