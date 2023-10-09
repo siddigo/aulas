@@ -4,8 +4,12 @@ public class Main {
     
     public static void main(String[] args) {
         
-        Pessoa sidnei = new Pessoa("Sidnei", 28, 'M');
+        NotaFiscal notaFiscal = new NotaFiscal(1,1);
 
-        System.out.println(sidnei);
+        notaFiscal.addItem("001", "Coca-Cola Lt", 2, 5.00);
+        notaFiscal.addItem("005", "Coxinha", 1, 8.00);
+        notaFiscal.addItem("012", "Pão de batata", 1, 8.00);
+
+        System.out.println(notaFiscal);
     }
 }

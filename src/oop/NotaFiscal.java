@@ -1,6 +1,7 @@
 package oop;
 
 import java.util.Date;
+import java.util.List;
 import java.util.ArrayList;
 
 public class NotaFiscal {
@@ -12,7 +13,7 @@ public class NotaFiscal {
     private int cpfCnpjDestinatario;
     private Date dataEmissao;;
     private double valorTotal;
-    private ArrayList<ItemNota> itens = new ArrayList<>();
+    private List<ItemNota> itens = new ArrayList<>();
 
     public NotaFiscal(){ }
 
@@ -23,12 +24,12 @@ public class NotaFiscal {
         setDataEmissao(data);
     }
 
-    public void addItem(String codigo, int quantidade, double valorUnitario){
+    public void addItem(String codigo, String descricao, int quantidade, double valorUnitario){
         
-        ArrayList<ItemNota> itens = new ArrayList<>();
+        List<ItemNota> itens = new ArrayList<>();
         itens=getItens();
 
-        ItemNota item = new ItemNota(codigo,quantidade,valorUnitario);
+        ItemNota item = new ItemNota(codigo,descricao,quantidade,valorUnitario);
         itens.add(item);
 
         double valorTotalItem=quantidade*valorUnitario;
@@ -40,12 +41,12 @@ public class NotaFiscal {
         setItens(itens);
     }
 
-    public void removeItem(String codigo, int quantidade, double valorUnitario){
+    public void removeItem(String codigo, String descricao, int quantidade, double valorUnitario){
         
-        ArrayList<ItemNota> itens = new ArrayList<>();
+        List<ItemNota> itens = new ArrayList<>();
         itens=getItens();
 
-        ItemNota item = new ItemNota(codigo,quantidade,valorUnitario);
+        ItemNota item = new ItemNota(codigo,descricao,quantidade,valorUnitario);
         
         double valorTotalNota=getValorTotal();
 
@@ -91,11 +92,11 @@ public class NotaFiscal {
         this.dataEmissao = dataEmissao;
     }
 
-    public ArrayList<ItemNota> getItens() {
+    public List<ItemNota> getItens() {
         return itens;
     }
 
-    public void setItens(ArrayList<ItemNota> itens) {
+    public void setItens(List<ItemNota> itens) {
         this.itens = itens;
     }
 
@@ -136,9 +137,29 @@ public class NotaFiscal {
 
         Integer numero=getNumero();
         Integer serie=getSerie();
+        Double total=getValorTotal();
 
-        String descricao=serie.toString()+" || "+numero.toString();
+        List<ItemNota>itens= new ArrayList<>(getItens());
 
+        String descricao="Nota Fiscal ";
+        descricao+=serie.toString()+" || "+numero.toString();
+        descricao+="\n\n";
+
+        for (int i = 0; i < itens.size(); i++) {
+
+            String codigo=itens.get(i).getCodigo();
+            String name=itens.get(i).getDescricao();
+            Integer quantidade=itens.get(i).getQuantidade();
+            Double valorUnitario=itens.get(i).getValorUnitario();
+            Double valorTotalItem=valorUnitario*quantidade;
+            
+            descricao+="( "+codigo+" ) "+name+" -\t"+quantidade+" x "+valorUnitario+"\t= "+valorTotalItem+"\n";
+
+        }
+
+        descricao+="\n";
+
+        descricao+="Total = "+total.toString();
         return descricao;
     }
 }

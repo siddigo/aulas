@@ -2,15 +2,17 @@ package oop;
 
 public class ItemNota {
     
-    private String codigo;
+    private String codigo;    
+    private String descricao;
     private int quantidade;
     private double valorUnitario;
 
     public ItemNota(){}
 
-    public ItemNota(String codigo, int quantidade, double valorUnitario){
+    public ItemNota(String codigo,String descricao, int quantidade, double valorUnitario){
 
         setCodigo(codigo);
+        setDescricao(descricao);
         setQuantidade(quantidade);
         setValorUnitario(valorUnitario);
     }
@@ -37,6 +39,14 @@ public class ItemNota {
 
     public void setValorUnitario(double valorUnitario) {
         this.valorUnitario = valorUnitario;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
 }
